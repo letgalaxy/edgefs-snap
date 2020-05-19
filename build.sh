@@ -1,5 +1,4 @@
 #!/bin/sh
-set -e
 
 mkdir -p edgefs/opt edgefs/usr/bin
 docker run -d --name=edgefs edgefs/edgefs:latest

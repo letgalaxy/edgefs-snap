@@ -1,19 +1,19 @@
 name: edgefs
-version: '2020.05.18'
+version: '2020.05.19'
 summary: EdgeFS packaged in Snap
 description: |
   University of Groningen - Software Engineering project.
 
 base: core18
 grade: devel
-confinement: devmode
+confinement: strict
 
 apps:
   edgefs:
     command: opt/nedge/sbin/edgefs-start.sh
 
 parts:
-  hyperion-docker:
+  edgefs:
     plugin: dump
     source: edgefs
     stage-packages:

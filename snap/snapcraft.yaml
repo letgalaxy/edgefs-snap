@@ -1,0 +1,42 @@
+name: edgefs
+version: '2020.05.18'
+summary: EdgeFS packaged in Snap
+description: |
+  University of Groningen - Software Engineering project.
+
+base: core18
+grade: devel
+confinement: devmode
+
+apps:
+  edgefs:
+    command: opt/nedge/sbin/edgefs-start.sh
+
+parts:
+  hyperion-docker:
+    plugin: dump
+    source: edgefs
+    stage-packages:
+      - libssl1.0.0
+      - iputils-ping
+      - iproute2
+      - libnss3
+      - libsnmp30
+      - udev
+      - bsdmainutils
+      - libcgroup1
+      - libcurl4
+      - nvi
+      - curl
+      - gdisk
+      - bcache-tools
+      - parted
+      - openssl
+      - netbase
+      - rpcbind
+      - gdb
+      - libaio1
+      - libnuma1
+      - nvme-cli
+      - krb5-user
+      - libatm1

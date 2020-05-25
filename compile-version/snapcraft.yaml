@@ -1,0 +1,60 @@
+name: edgefs
+version: '2020.05.24'
+summary: Snap package of EdgeFS
+description: |
+  University of Groningen - Software Engineering project.
+  Package: EdgeFS Multi-Cloud Distributed Storage System.
+
+base: core18
+grade: devel
+confinement: strict
+
+apps:
+  edgefs:
+    command: opt/nedge/sbin/edgefs-start.sh
+
+parts:
+  edgefs:
+    plugin: make
+    source: https://github.com/letgalaxy/edgefs.git
+    override-pull: git clone https://github.com/letgalaxy/edgefs /opt/edgefs
+    build-environment:
+      - DEBIAN_FRONTEND: "noninteractive"
+      - NEDGE_NDEBUG: "1"
+      - NEDGE_HOME: "/opt/nedge"
+      - NEDGE_VERSION: "${NEDGE_VERSION}"
+    build-packages:
+      - software-properties-common
+    override-build: |
+      mkdir -p $NEDGE_HOME
+      . /opt/edgefs/env.sh
+      make -C /opt/edgefs clean world
+      rm -f $NEDGE_HOME/lib/*.a $NEDGE_HOME/lib/*.la
+      cp -ar $NEDGE_HOME/etc $NEDGE_HOME/etc.default
+    stage-packages:
+      - libssl1.0.0
+      - iputils-ping
+      - iproute2
+      - libnss3
+      - libsnmp30
+      - udev
+      - bsdmainutils
+      - libcgroup1
+      - libcurl4
+      - nvi
+      - curl
+      - gdisk
+      - bcache-tools
+      - parted
+      - openssl
+      - netbase
+      - rpcbind
+      - gdb
+      - libaio1
+      - libnuma1
+      - nvme-cli
+      - krb5-user
+      - libatm1
+    organize:
+      "/opt/nedge": opt/nedge/
+      "/opt/edgefs/scripts/toolbox": bin/

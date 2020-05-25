@@ -1,8 +1,9 @@
 name: edgefs
 version: '2020.05.19'
-summary: EdgeFS packaged in Snap
+summary: Snap package of EdgeFS
 description: |
   University of Groningen - Software Engineering project.
+  Package: EdgeFS Multi-Cloud Distributed Storage System.
 
 base: core18
 grade: devel
